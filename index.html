@@ -12,22 +12,23 @@
       padding: 2rem;
     }
     .terminal-line {
+      white-space: pre;
+      overflow: hidden;
+      border-right: 0.15em solid #00ff00;
+      animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+      width: 0;
       opacity: 0;
-      animation: fadeIn 1s ease forwards;
     }
-    .terminal-line:nth-child(1) { animation-delay: 0.2s; }
-    .terminal-line:nth-child(2) { animation-delay: 1s; }
-    .terminal-line:nth-child(3) { animation-delay: 2s; }
-    .terminal-line:nth-child(4) { animation-delay: 3s; }
-    .terminal-line:nth-child(5) { animation-delay: 4s; }
-    .terminal-line:nth-child(6) { animation-delay: 5s; }
-    .terminal-line:nth-child(7) { animation-delay: 6s; }
-    .terminal-line:nth-child(8) { animation-delay: 7s; }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+    .terminal-line.show {
+      opacity: 1;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #00ff00; }
     }
     a {
       color: #00ffff;
@@ -58,14 +59,22 @@
   <div class="terminal">
     <div class="photo-placeholder">Image coming soon...</div>
 
-    <div class="terminal-line"><span class="green">michael@local:~$</span> sudo portfolio</div>
-    <div class="terminal-line">Hi, I'm Michael.</div>
-    <div class="terminal-line">An IT Support Specialist passionate about solving tech problems and empowering users.</div>
-    <div class="terminal-line">I assist individuals and organizations in maintaining smooth IT operations.</div>
-    <div class="terminal-line">You can contact me via email: <a href="mailto:your.email@example.com">your.email@example.com</a></div>
-    <div class="terminal-line">My GitHub: <a href="#">github.com/yourusername</a></div>
-    <div class="terminal-line">LinkedIn: <a href="#">linkedin.com/in/yourprofile</a></div>
-    <div class="terminal-line">More updates coming soon...</div>
+    <div class="terminal-line" style="animation-delay: 0s"> <span class="green">michael@local:~$</span> sudo portfolio</div>
+    <div class="terminal-line" style="animation-delay: 3s"> Hi, I'm Michael.</div>
+    <div class="terminal-line" style="animation-delay: 6s"> An IT Support Specialist passionate about solving tech problems and empowering users.</div>
+    <div class="terminal-line" style="animation-delay: 9s"> I assist individuals and organizations in maintaining smooth IT operations.</div>
+    <div class="terminal-line" style="animation-delay: 12s"> You can contact me via email: <a href="mailto:your.email@example.com">your.email@example.com</a></div>
+    <div class="terminal-line" style="animation-delay: 15s"> My GitHub: <a href="#">github.com/yourusername</a></div>
+    <div class="terminal-line" style="animation-delay: 18s"> LinkedIn: <a href="#">linkedin.com/in/yourprofile</a></div>
+    <div class="terminal-line" style="animation-delay: 21s"> More updates coming soon...</div>
   </div>
+  <script>
+    const lines = document.querySelectorAll('.terminal-line');
+    lines.forEach((line, i) => {
+      setTimeout(() => {
+        line.classList.add('show');
+      }, i * 3000);
+    });
+  </script>
 </body>
 </html>
